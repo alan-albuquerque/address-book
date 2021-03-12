@@ -1,17 +1,24 @@
-import path from 'path';
-import webpack from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
-import ESLintPlugin from 'eslint-webpack-plugin';
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
-const config: webpack.Configuration = {
+module.exports = () => ({
   mode: 'development',
   output: {
     publicPath: '/',
+    pathinfo: true,
+    filename: 'static/js/bundle.js',
+    chunkFilename: 'static/js/[name].chunk.js',
   },
   entry: './src/index.tsx',
   module: {
     rules: [
+      {
+        test: /\.(css)$/,
+        use: ['style-loader', 'css-loader'],
+      },
       {
         test: /\.(ts|js)x?$/i,
         exclude: /node_modules/,
@@ -51,6 +58,5 @@ const config: webpack.Configuration = {
     open: true,
     hot: true,
   },
-};
+});
 
-export default config;
