@@ -1,26 +1,54 @@
 {
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2018,
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint",
-    "react-hooks"
-  ],
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended"
+    "react",
+//    "@typescript-eslint",
+    "react-hooks",
+    "prettier"
   ],
   "rules": {
+    "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "react/prop-types": "off"
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
   },
   "settings": {
-    "react": {
-      "pragma": "React",
-      "version": "detect"
-    }
+    "react": { "version": "detect" },
+    "import/resolver": { "typescript": {} }
   }
 }
