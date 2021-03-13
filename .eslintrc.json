@@ -19,7 +19,6 @@
   },
   "plugins": [
     "react",
-//    "@typescript-eslint",
     "react-hooks",
     "prettier"
   ],
@@ -28,6 +27,8 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off", // we are using Typescript interfaces for it
     "@typescript-eslint/no-use-before-define": ["error"],
     "react/jsx-filename-extension": [
       1,
