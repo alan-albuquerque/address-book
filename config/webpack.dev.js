@@ -1,11 +1,11 @@
-const paths = require('./paths')
-const {merge} = require('webpack-merge')
-const common = require('./webpack.common')
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
+const paths = require('./paths');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = merge(common, {
   mode: 'development',
-  target: "web",
+  target: 'web',
   module: {
     rules: [
       {
@@ -14,9 +14,7 @@ module.exports = merge(common, {
         use: {
           loader: require.resolve('babel-loader'),
           options: {
-            plugins: [
-              require.resolve('react-refresh/babel')
-            ],
+            plugins: [require.resolve('react-refresh/babel')],
             presets: [
               '@babel/preset-env',
               '@babel/preset-react',
@@ -27,9 +25,7 @@ module.exports = merge(common, {
       },
     ],
   },
-  plugins: [
-    new ReactRefreshWebpackPlugin(),
-  ],
+  plugins: [new ReactRefreshWebpackPlugin()],
   devtool: 'inline-source-map',
   devServer: {
     contentBase: paths.build,
@@ -39,4 +35,3 @@ module.exports = merge(common, {
     hot: true,
   },
 });
-

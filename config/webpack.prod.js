@@ -1,6 +1,6 @@
-const paths = require('./paths')
-const {merge} = require('webpack-merge')
-const common = require('./webpack.common')
+const paths = require('./paths');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -25,7 +25,7 @@ module.exports = merge(common, {
           preset: [
             'default',
             {
-              discardComments: {removeAll: true},
+              discardComments: { removeAll: true },
             },
           ],
         },
@@ -36,7 +36,7 @@ module.exports = merge(common, {
       name: false,
     },
     runtimeChunk: {
-      name: (entrypoint) => {
+      name: entrypoint => {
         return `runtime-${entrypoint.name}`;
       },
     },

@@ -1,11 +1,11 @@
 const path = require('path');
-const paths = require('./paths')
+const paths = require('./paths');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const tailwindcss = require('tailwindcss')
-const autoprefixer = require('autoprefixer') // help tailwindcss to work
+const tailwindcss = require('tailwindcss');
+const autoprefixer = require('autoprefixer'); // help tailwindcss to work
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -58,7 +58,7 @@ module.exports = {
       chunkFilename: '[id].[contenthash:8].chunk.css',
     }),
     new HtmlWebpackPlugin({
-      title: "Contacts App",
+      title: 'Contacts App',
       template: path.join(paths.public, 'index.html'),
       favicon: path.join(paths.assets, 'icons/favicon.png'),
     }),
@@ -78,4 +78,3 @@ module.exports = {
     hot: true,
   },
 };
-
