@@ -49,6 +49,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      "@src": paths.src
+    },
     extensions: ['.tsx', '.ts', '.js'],
   },
   plugins: [

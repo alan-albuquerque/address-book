@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
+import Header from '@src/components/Header';
 
 function App(): ReactElement {
   return (
-    <div className="flex">
-      <div className="flex-none w-48 relative">olá</div>
+    <div>
+      <Header />
     </div>
   );
 }

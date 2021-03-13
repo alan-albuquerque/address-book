@@ -59,9 +59,6 @@ module.exports = merge(common, {
       },
     ],
   },
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
   plugins: [
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
