@@ -6,19 +6,43 @@ export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   descriptionSearch?: string;
   searchText?: string;
+  onCancel: () => void;
 }
 
 const Search: FunctionComponent<SearchProps> = props => {
-  const { label = 'Search', descriptionSearch, value, ...rest } = props;
+  const {
+    label = 'Search',
+    name = 'searchInput',
+    descriptionSearch,
+    value,
+    onCancel,
+    ...rest
+  } = props;
+
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
+
+  const focusTextInput = () => {
+    if (searchInputRef && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
+  const cancelSearch = () => {
+    if (onCancel) onCancel();
+    focusTextInput();
+  };
+
   return (
     <div className="flex flex-row border-2 rounded-3xl">
       {!value && (
-        <div className="my-auto mx-1 px-2.5 pr-0">
+        <label htmlFor={name} className="my-auto mx-1 px-2.5 pr-0">
           <SearchIcon fill="currentColor" className="w-5 h-5 text-gray-500" />
-        </div>
+        </label>
       )}
       <input
-        name="searchInput"
+        ref={searchInputRef}
+        name={name}
+        id={name}
         className="flex-grow p-3 outline-none rounded-3xl"
         placeholder={label}
         value={value}
@@ -29,7 +53,11 @@ const Search: FunctionComponent<SearchProps> = props => {
       />
       {value && (
         <div className="my-auto mx-1 px-2.5 h-5">
-          <button type="button" aria-label="Reset search input">
+          <button
+            type="button"
+            aria-label="Reset search input"
+            onClick={cancelSearch}
+          >
             <div className="w-5 h-5">
               <CancelIcon
                 fill="currentColor"

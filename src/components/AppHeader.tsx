@@ -9,6 +9,10 @@ const AppHeader: FunctionComponent = () => {
     setSearchText(event.target.value);
   };
 
+  const clearSearchTextState = () => {
+    setSearchText('');
+  };
+
   return (
     <Header>
       <div className="flex">
@@ -19,6 +23,7 @@ const AppHeader: FunctionComponent = () => {
           <Search
             value={searchText}
             onChange={setSearchTextState}
+            onCancel={clearSearchTextState}
             descriptionSearch="Start typing to search for contacts"
           />
         </div>
