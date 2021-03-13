@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
-import Header from '@src/components/Header';
+import Home from '@src/views/Home';
+import Layout from '@src/components/core/layout/Layout';
 
 function App(): ReactElement {
   return (
-    <div>
-      <Header />
-    </div>
+    <Layout>
+      <Home />
+    </Layout>
   );
 }
 

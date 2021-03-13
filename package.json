@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "@react-aria/button": "^3.3.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   },
