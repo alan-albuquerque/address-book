@@ -9,7 +9,17 @@
   "scripts": {
     "start": "webpack serve --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
-    "prettify": "prettier \"**/*.*(js|jsx)\" --ignore-path=.prettierignore --write"
+    "prettify": "prettier \"**/*.*(js|jsx)\" --ignore-path=.prettierignore --write",
+    "lint": "eslint src && npm run prettify",
+    "lint-fix": "eslint src --fix && npm run prettify"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
   },
   "devDependencies": {
     "@babel/core": "^7.13.10",
@@ -41,6 +51,7 @@
     "eslint-webpack-plugin": "^2.5.2",
     "fork-ts-checker-webpack-plugin": "^6.1.1",
     "html-webpack-plugin": "^5.3.1",
+    "lint-staged": "^10.5.4",
     "mini-css-extract-plugin": "^1.3.9",
     "node-sass": "^5.0.0",
     "postcss": "^8.2.8",
