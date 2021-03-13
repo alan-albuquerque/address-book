@@ -31,7 +31,7 @@ module.exports = merge(common, {
     contentBase: paths.build,
     historyApiFallback: true,
     port: 4000,
-    open: true,
+    open: false,
     hot: true,
   },
 });
