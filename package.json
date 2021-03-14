@@ -7,7 +7,8 @@
     "classnames": "^2.2.6",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
-    "react-icons": "^4.2.0"
+    "react-icons": "^4.2.0",
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "start": "webpack serve --config config/webpack.dev.js",
@@ -41,6 +42,7 @@
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.2",
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.17.0",
     "@typescript-eslint/parser": "^4.17.0",
     "autoprefixer": "^10.2.5",

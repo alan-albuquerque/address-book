@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
-import Home from '@src/pages/Home';
+import AppRouter from '@src/AppRouter';
 
 function App(): ReactElement {
-  return <Home />;
+  return <AppRouter />;
 }
 
 export default App;
