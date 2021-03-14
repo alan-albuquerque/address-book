@@ -1,13 +1,8 @@
 import React, { ReactElement } from 'react';
-import Home from '@src/views/Home';
-import Layout from '@src/components/core/layout/Layout';
+import Home from '@src/pages/Home';
 
 function App(): ReactElement {
-  return (
-    <Layout>
-      <Home />
-    </Layout>
-  );
+  return <Home />;
 }
 
 export default App;
