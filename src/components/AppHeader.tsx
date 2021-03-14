@@ -39,7 +39,8 @@ const AppHeader: FunctionComponent = () => {
             className="h-8 w-8"
             title="Settings"
             icon={<FaCog />}
-            aria-label="Reset search input"
+            role="link"
+            aria-label="Open settings page"
           />
         </div>
       </div>

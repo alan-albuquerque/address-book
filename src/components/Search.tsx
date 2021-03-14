@@ -51,6 +51,7 @@ const Search: FunctionComponent<SearchProps> = props => {
         value={value}
         autoCorrect="off"
         aria-autocomplete="list"
+        spellCheck={false}
         aria-describedby="descriptionSearch"
         {...rest}
       />
