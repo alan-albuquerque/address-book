@@ -4,6 +4,7 @@ const common = require('./webpack.common');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -60,6 +61,9 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
+    new Dotenv({
+      path: './.env.production',
+    }),
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
     }),

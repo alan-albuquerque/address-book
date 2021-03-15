@@ -2,6 +2,7 @@ const paths = require('./paths');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = merge(common, {
   mode: 'development',
@@ -25,7 +26,12 @@ module.exports = merge(common, {
       },
     ],
   },
-  plugins: [new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new Dotenv({
+      path: './.env.development',
+    }),
+    new ReactRefreshWebpackPlugin(),
+  ],
   devtool: 'inline-source-map',
   devServer: {
     contentBase: paths.build,
