@@ -12,6 +12,7 @@ export interface IRandomUserPicture {
 
 export interface IRandomUserLogin {
   username: string;
+  uuid: string;
 }
 
 export interface IRandomUser {

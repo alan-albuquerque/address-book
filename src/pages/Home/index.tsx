@@ -1,36 +1,38 @@
-import React, { FunctionComponent, useEffect, useState } from 'react';
 import AppHeader from '@src/components/AppHeader';
+import ContactScrollList from '@src/components/ContactInfiniteList';
 import Layout from '@src/components/core/layout/Layout';
-import ContactItem from '@src/components/ContactItem';
 import { useStore } from '@src/store';
-import { observer } from 'mobx-react-lite';
 import { autorun } from 'mobx';
-import ContactList from '@src/components/ContactList';
+import { observer } from 'mobx-react-lite';
+import React, { FunctionComponent, useEffect, useState } from 'react';
 
 const Home: FunctionComponent = observer(() => {
-  const batchLimit = 50;
-
-  const [page] = useState<number>(1);
+  const [page, setPage] = useState<number>(1);
 
   const { contactStore } = useStore();
 
   useEffect(
     () =>
       autorun(() => {
-        contactStore.loadContacts(page, batchLimit);
+        contactStore.loadContacts(page, 50);
       }),
     [contactStore, page],
   );
+
+  const loadMore = () => {
+    setPage(prevPage => prevPage + 1);
+  };
 
   return (
     <Layout>
       <AppHeader />
       <div className="max-w-lg mx-auto">
-        <ContactList>
-          {contactStore.contacts.map(value => (
-            <ContactItem {...value} clickable className="mb-2.5 mx-1" />
-          ))}
-        </ContactList>
+        <ContactScrollList
+          loading={contactStore.loading}
+          contacts={contactStore.contacts}
+          hasMore={contactStore.hasMore}
+          loadMore={loadMore}
+        />
       </div>
     </Layout>
   );

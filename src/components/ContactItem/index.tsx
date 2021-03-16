@@ -1,6 +1,6 @@
+import classNames from 'classnames';
 import React, { FunctionComponent, HTMLAttributes } from 'react';
 import { FaUser } from 'react-icons/fa';
-import classNames from 'classnames';
 
 export interface ContactItemProps extends HTMLAttributes<HTMLDivElement> {
   firstName?: string;
@@ -38,7 +38,12 @@ const ContactItem: FunctionComponent<ContactItemProps> = ({
     <div className={classNameList} aria-label={contactBoxLabel} {...rest}>
       <div className="flex flex-row">
         <div>
-          <div className="flex justify-center items-center p-0.5 rounded-full overflow-hidden border hover:bg-purple-800 w-16 h-16">
+          <div
+            className="
+            flex justify-center items-center p-0.5 rounded-full
+            overflow-hidden border hover:bg-purple-800 w-16 h-16
+            "
+          >
             {pictureUrl ? (
               <img
                 src={pictureUrl}

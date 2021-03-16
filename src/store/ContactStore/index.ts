@@ -1,4 +1,4 @@
-import { action, observable } from 'mobx';
+import { makeAutoObservable } from 'mobx';
 import { IContact } from '@src/domain/Contact';
 import {
   IRandomUser,
@@ -8,27 +8,39 @@ import { IContactStore } from './types';
 
 export * from './types';
 
+const CONTACTS_LIMIT = 100;
+
 export class ContactStore implements IContactStore {
-  @observable.shallow
   contacts: IContact[] = [];
 
-  @action
-  loadContacts(page: number, limit: number): void {
-    randomUserService
-      .getUsersPaginated({
-        page,
-        results: limit,
-      })
-      .then(response => {
-        if (response.results) {
-          this.contacts.push(...ContactStore.mapToContact(response.results));
-        }
-      });
+  loading = false;
+
+  hasMore = false;
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+
+  async loadContacts(page: number, limit: number): Promise<void> {
+    this.loading = true;
+    const { results, info } = await randomUserService.getUsersPaginated({
+      page,
+      results: limit,
+    });
+    if (info?.results > 0) {
+      this.contacts.push(...ContactStore.mapToContact(results));
+      this.hasMore =
+        this.contacts.length < CONTACTS_LIMIT && info.results === limit;
+    } else {
+      this.hasMore = false;
+    }
+    this.loading = false;
   }
 
   static mapToContact(users: IRandomUser[]): IContact[] {
     return (
       users?.map(user => ({
+        id: user?.login?.uuid,
         email: user?.email,
         firstName: user?.name?.first,
         lastName: user?.name?.last,
