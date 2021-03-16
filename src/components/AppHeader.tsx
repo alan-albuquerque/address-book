@@ -1,18 +1,24 @@
-import React, { FunctionComponent } from 'react';
+import Button from '@src/components/core/Button';
 import Header from '@src/components/core/layout/Header';
 import Search from '@src/components/Search';
-import Button from '@src/components/core/Button';
+import React, { FunctionComponent } from 'react';
 import { FaCog } from 'react-icons/fa';
 
-const AppHeader: FunctionComponent = () => {
-  const [searchText, setSearchText] = React.useState('');
+export interface AppHeaderProps {
+  onSearch?: (searchTerm: string) => void;
+  searchTerm?: string;
+}
 
+const AppHeader: FunctionComponent<AppHeaderProps> = ({
+  onSearch,
+  searchTerm = '',
+}) => {
   const setSearchTextState = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(event.target.value);
+    if (onSearch) onSearch(event.target.value);
   };
 
   const clearSearchTextState = () => {
-    setSearchText('');
+    if (onSearch) onSearch('');
   };
 
   return (
@@ -28,7 +34,7 @@ const AppHeader: FunctionComponent = () => {
         </div>
         <div className="flex-initial w-3/5">
           <Search
-            value={searchText}
+            value={searchTerm}
             onChange={setSearchTextState}
             onCancel={clearSearchTextState}
             descriptionSearch="Start typing to search for contacts"

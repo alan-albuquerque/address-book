@@ -2,37 +2,50 @@ import AppHeader from '@src/components/AppHeader';
 import ContactScrollList from '@src/components/ContactInfiniteList';
 import Layout from '@src/components/core/layout/Layout';
 import { useStore } from '@src/store';
-import { autorun } from 'mobx';
 import { observer } from 'mobx-react-lite';
-import React, { FunctionComponent, useEffect, useState } from 'react';
+import React, { FunctionComponent, useCallback, useEffect } from 'react';
 
 const Home: FunctionComponent = observer(() => {
-  const [page, setPage] = useState<number>(1);
-
   const { contactStore } = useStore();
 
-  useEffect(
-    () =>
-      autorun(() => {
-        contactStore.loadContacts(page, 50);
-      }),
-    [contactStore, page],
-  );
+  const loadMore = useCallback(() => {
+    if (contactStore.searchTerm) return;
+    contactStore.currentPage += 1;
+    contactStore.loadContacts(contactStore.currentPage, 50);
+  }, [contactStore]);
 
-  const loadMore = () => {
-    setPage(prevPage => prevPage + 1);
+  useEffect(() => {
+    loadMore();
+  }, [loadMore]);
+
+  const onSearch = (searchTerm: string) => {
+    contactStore.searchTerm = searchTerm;
   };
 
   return (
     <Layout>
-      <AppHeader />
+      <AppHeader searchTerm={contactStore.searchTerm} onSearch={onSearch} />
       <div className="max-w-lg mx-auto">
         <ContactScrollList
           loading={contactStore.loading}
-          contacts={contactStore.contacts}
+          contacts={contactStore.filteredContacts}
           hasMore={contactStore.hasMore}
           loadMore={loadMore}
         />
+        {contactStore.searchTerm &&
+          contactStore.hasMore &&
+          !contactStore.filteredContacts.length && (
+            <div className="flex flex-row p-4 justify-center items-center text-gray-700 font-semibold">
+              <div>Your search did not match any contacts</div>
+            </div>
+          )}
+        {contactStore.searchTerm &&
+          contactStore.hasMore &&
+          contactStore.contacts.length && (
+            <div className="flex flex-row p-4 justify-center items-center text-gray-700">
+              <div>contacts loading paused while searching</div>
+            </div>
+          )}
       </div>
     </Layout>
   );

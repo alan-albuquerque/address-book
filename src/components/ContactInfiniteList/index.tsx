@@ -17,55 +17,59 @@ export interface ContactScrollListProps extends HTMLAttributes<HTMLDivElement> {
   loadMore: () => void;
 }
 
-const ContactScrollList: FunctionComponent<ContactScrollListProps> = observer(
-  ({ loading, contacts, hasMore, loadMore, ...rest }) => {
-    const refObserver = useRef<IntersectionObserver>();
+const ContactScrollList: FunctionComponent<ContactScrollListProps> = ({
+  loading,
+  contacts,
+  hasMore,
+  loadMore,
+  ...rest
+}) => {
+  const refObserver = useRef<IntersectionObserver>();
 
-    const lastElementRef = useCallback(
-      node => {
-        if (loading) return;
-        refObserver?.current?.disconnect();
-        refObserver.current = new IntersectionObserver(entries => {
-          if (entries[0].isIntersecting && hasMore) {
-            if (loadMore) loadMore();
+  const lastElementRef = useCallback(
+    node => {
+      if (loading) return;
+      refObserver?.current?.disconnect();
+      refObserver.current = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && hasMore) {
+          if (loadMore) loadMore();
+        }
+      });
+      if (node) refObserver.current.observe(node);
+    },
+    [loadMore, loading, hasMore],
+  );
+
+  function renderContactItem(contact: IContact) {
+    return <ContactItem {...contact} clickable className="mb-2.5 mx-1" />;
+  }
+
+  return (
+    <div {...rest}>
+      <ContactList>
+        {contacts?.map((contact, index) => {
+          if (contacts.length === index + 1) {
+            return (
+              <div ref={lastElementRef} key={contact.id}>
+                {renderContactItem(contact)}
+              </div>
+            );
           }
-        });
-        if (node) refObserver.current.observe(node);
-      },
-      [loadMore, loading, hasMore],
-    );
+          return <div key={contact.id}>{renderContactItem(contact)}</div>;
+        })}
+      </ContactList>
+      {loading && (
+        <div className="flex flex-row p-4 justify-center items-center">
+          <Loading>loading...</Loading>
+        </div>
+      )}
+      {!hasMore && (
+        <div className="flex flex-row p-4 justify-center items-center">
+          <div>end of users catalog</div>
+        </div>
+      )}
+    </div>
+  );
+};
 
-    function renderContactItem(contact: IContact) {
-      return <ContactItem {...contact} clickable className="mb-2.5 mx-1" />;
-    }
-
-    return (
-      <div {...rest}>
-        <ContactList>
-          {contacts?.map((contact, index) => {
-            if (contacts.length === index + 1) {
-              return (
-                <div ref={lastElementRef} key={contact.id}>
-                  {renderContactItem(contact)}
-                </div>
-              );
-            }
-            return <div key={contact.id}>{renderContactItem(contact)}</div>;
-          })}
-        </ContactList>
-        {loading && (
-          <div className="flex flex-row p-4 justify-center items-center">
-            <Loading>loading...</Loading>
-          </div>
-        )}
-        {!hasMore && (
-          <div className="flex flex-row p-4 justify-center items-center">
-            <div>end of users catalog.</div>
-          </div>
-        )}
-      </div>
-    );
-  },
-);
-
-export default ContactScrollList;
+export default observer(ContactScrollList);

@@ -17,6 +17,10 @@ export class ContactStore implements IContactStore {
 
   hasMore = false;
 
+  searchTerm = '';
+
+  currentPage = 0;
+
   constructor() {
     makeAutoObservable(this);
   }
@@ -35,6 +39,16 @@ export class ContactStore implements IContactStore {
       this.hasMore = false;
     }
     this.loading = false;
+  }
+
+  get filteredContacts(): IContact[] {
+    return this.contacts.filter(contact => {
+      const findByFullName = `${contact.firstName} ${contact.lastName}`
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+
+      return findByFullName;
+    });
   }
 
   static mapToContact(users: IRandomUser[]): IContact[] {
