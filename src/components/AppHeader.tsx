@@ -22,8 +22,8 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
   };
 
   return (
-    <Header>
-      <div className="flex py-4">
+    <Header sticky>
+      <div className="flex py-4 bg-white">
         <div
           className="
           flex-initial w-1/5 m-auto px-1.5

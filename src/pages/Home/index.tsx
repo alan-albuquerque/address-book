@@ -36,14 +36,14 @@ const Home: FunctionComponent = observer(() => {
           contactStore.hasMore &&
           !contactStore.filteredContacts.length && (
             <div className="flex flex-row p-4 justify-center items-center text-gray-700 font-semibold">
-              <div>Your search did not match any contacts</div>
+              Your search did not match any contacts
             </div>
           )}
         {contactStore.searchTerm &&
           contactStore.hasMore &&
           contactStore.contacts.length && (
             <div className="flex flex-row p-4 justify-center items-center text-gray-700">
-              <div>contacts loading paused while searching</div>
+              contacts loading paused while searching
             </div>
           )}
       </div>
