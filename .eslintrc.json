@@ -28,6 +28,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "no-use-before-define": "off",
     "react/jsx-props-no-spreading": "off",
+    "class-methods-use-this": "off",
     "react/prop-types": "off",
     // we are using Typescript interfaces for it
     "@typescript-eslint/no-use-before-define": [

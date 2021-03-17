@@ -1,10 +1,12 @@
-import { makeAutoObservable } from 'mobx';
+import { LoadingState } from '@src/@types/globals';
 import { IContact } from '@src/domain/Contact';
 import {
   IRandomUser,
+  IRandomUserResponse,
   randomUserService,
 } from '@src/services/RandomUserService';
-import { IContactStore } from './types';
+import { makeAutoObservable } from 'mobx';
+import { IContactStore, LoadContactsParams } from './types';
 
 export * from './types';
 
@@ -13,7 +15,7 @@ const CONTACTS_LIMIT = 100;
 export class ContactStore implements IContactStore {
   contacts: IContact[] = [];
 
-  loading = false;
+  loadingState: LoadingState = 'inactive';
 
   hasMore = false;
 
@@ -22,33 +24,63 @@ export class ContactStore implements IContactStore {
   currentPage = 0;
 
   constructor() {
+    this.reset();
     makeAutoObservable(this);
   }
 
-  async loadContacts(page: number, limit: number): Promise<void> {
-    this.loading = true;
-    const { results, info } = await randomUserService.getUsersPaginated({
-      page,
-      results: limit,
+  reset(): void {
+    this.contacts = [];
+    this.loadingState = 'inactive';
+    this.hasMore = false;
+    this.searchTerm = '';
+    this.currentPage = 0;
+  }
+
+  addContacts(newValue: IContact[]): void {
+    this.contacts.push(...newValue);
+  }
+
+  get filteredContacts(): IContact[] {
+    return this.contacts.filter(contact => {
+      return `${contact.firstName} ${contact.lastName}`
+        .toLowerCase()
+        .trim()
+        .includes(this.searchTerm.toLowerCase().trim());
     });
+  }
+
+  loadContacts({ page, limit, countries }: LoadContactsParams): void {
+    this.loadingState = 'pending';
+    randomUserService
+      .getUsersPaginated({
+        page,
+        results: limit,
+        nat: countries?.join(','),
+      })
+      .then(resp => this.loadContactsSuccessHandler(resp, limit))
+      .catch(this.errorHandler);
+  }
+
+  private loadContactsSuccessHandler(
+    { results, info }: IRandomUserResponse<IRandomUser>,
+    limit: number,
+  ): void {
     if (info?.results > 0) {
-      this.contacts.push(...ContactStore.mapToContact(results));
+      this.addContacts(ContactStore.mapToContact(results));
       this.hasMore =
         this.contacts.length < CONTACTS_LIMIT && info.results === limit;
     } else {
       this.hasMore = false;
     }
-    this.loading = false;
+    this.successHandler();
   }
 
-  get filteredContacts(): IContact[] {
-    return this.contacts.filter(contact => {
-      const findByFullName = `${contact.firstName} ${contact.lastName}`
-        .toLowerCase()
-        .includes(this.searchTerm.toLowerCase());
+  private successHandler(): void {
+    this.loadingState = 'success';
+  }
 
-      return findByFullName;
-    });
+  private errorHandler(): void {
+    this.loadingState = 'error';
   }
 
   static mapToContact(users: IRandomUser[]): IContact[] {

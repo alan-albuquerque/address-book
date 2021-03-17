@@ -34,7 +34,11 @@ export interface IRandomUserResponse<T> {
   info: IRandomUserResponseInfo;
 }
 
-export interface IRandomUserPaginateParams {
+export interface IRandomUserFilterParams {
+  nat?: string;
+}
+
+export interface IRandomUserPaginateParams extends IRandomUserFilterParams {
   page: number;
   results: number;
 }

@@ -3,15 +3,18 @@ import Header from '@src/components/core/layout/Header';
 import Search from '@src/components/Search';
 import React, { FunctionComponent } from 'react';
 import { FaCog } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 export interface AppHeaderProps {
   onSearch?: (searchTerm: string) => void;
   searchTerm?: string;
+  title?: string;
 }
 
 const AppHeader: FunctionComponent<AppHeaderProps> = ({
   onSearch,
   searchTerm = '',
+  title = '',
 }) => {
   const setSearchTextState = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onSearch) onSearch(event.target.value);
@@ -27,27 +30,37 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
         <div
           className="
           flex-initial w-1/5 m-auto px-1.5
-          text-center font-semibold text-purple-800 text-xs sm:text-base
+          text-center text-purple-800 text-xs sm:text-base
           "
         >
-          Address Book
+          <Link to="/" title="Home" aria-label="Home page">
+            Address <span className="font-semibold">Book</span>
+          </Link>
         </div>
-        <div className="flex-initial w-3/5">
-          <Search
-            value={searchTerm}
-            onChange={setSearchTextState}
-            onCancel={clearSearchTextState}
-            descriptionSearch="Start typing to search for contacts"
-          />
+        <div className="flex-initial w-3/5 h-14">
+          {title && (
+            <h1
+              className="
+              flex justify-center items-center h-full w-full text-2xl
+              font-black text-gray-700
+              "
+            >
+              {title}
+            </h1>
+          )}
+          {onSearch && (
+            <Search
+              value={searchTerm}
+              onChange={setSearchTextState}
+              onCancel={clearSearchTextState}
+              descriptionSearch="Start typing to search for contacts"
+            />
+          )}
         </div>
         <div className="flex flex-col justify-center px-2 w-1/5">
-          <Button
-            className="h-8 w-8"
-            title="Settings"
-            icon={<FaCog />}
-            role="link"
-            aria-label="Open settings page"
-          />
+          <Link to="/settings" aria-label="Settings page" title="Settings">
+            <Button className="h-8 w-8" icon={<FaCog />} />
+          </Link>
         </div>
       </div>
     </Header>

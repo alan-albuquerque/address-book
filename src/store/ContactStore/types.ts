@@ -1,12 +1,19 @@
+import { LoadingState } from '@src/@types/globals';
 import { IContact } from '@src/domain/Contact';
+
+export interface LoadContactsParams {
+  page: number;
+  limit: number;
+  countries?: string[];
+}
 
 export interface IContactStore {
   contacts: IContact[];
   filteredContacts: IContact[];
-  loading: boolean;
   hasMore: boolean;
   searchTerm: string;
   currentPage: number;
+  loadingState: LoadingState;
 
-  loadContacts(page: number, limit: number): void;
+  loadContacts(params: LoadContactsParams): void;
 }
