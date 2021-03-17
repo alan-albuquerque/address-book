@@ -2,7 +2,7 @@ import Button from '@src/components/core/Button';
 import Header from '@src/components/core/layout/Header';
 import Search from '@src/components/Search';
 import React, { FunctionComponent } from 'react';
-import { FaCog } from 'react-icons/fa';
+import { FaHome, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export interface AppHeaderProps {
@@ -29,7 +29,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
       <div className="flex py-4 bg-white">
         <div
           className="
-          flex-initial w-1/5 m-auto px-1.5
+          flex flex-row justify-center items-center w-3/12 m-auto px-1.5
           text-center text-purple-800 text-xs sm:text-base
           "
         >
@@ -37,7 +37,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
             Address <span className="font-semibold">Book</span>
           </Link>
         </div>
-        <div className="flex-initial w-3/5 h-14">
+        <div className="flex-initial w-6/12 h-14">
           {title && (
             <h1
               className="
@@ -57,8 +57,16 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
             />
           )}
         </div>
-        <div className="flex flex-col justify-center px-2 w-1/5">
-          <Link to="/settings" aria-label="Settings page" title="Settings">
+        <div className="flex flex-row items-center justify-center px-2 w-3/12">
+          <Link to="/" className="mx-1" aria-label="Home page" title="Home">
+            <Button className="h-8 w-8" icon={<FaHome />} />
+          </Link>
+          <Link
+            to="/settings"
+            className="mx-1"
+            aria-label="Settings page"
+            title="Settings"
+          >
             <Button className="h-8 w-8" icon={<FaCog />} />
           </Link>
         </div>

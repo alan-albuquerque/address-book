@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const HomeFiltersDetail: FunctionComponent = observer(() => {
   const { settingsStore } = useStore();
 
-  return (
+  return settingsStore.selectedCountries?.length ? (
     <div className="flex items-center px-1 py-3 text-sm">
       <span className="mr-2">Filtering contacts from countries:</span>
       {settingsStore.selectedCountries.map(value => (
@@ -15,7 +15,7 @@ const HomeFiltersDetail: FunctionComponent = observer(() => {
         </span>
       ))}
       <Link
-        className="ml-auto hover:text-purple-800"
+        className="ml-auto text-xs font-semibold hover:text-purple-800"
         to="/settings"
         aria-label="Settings page"
         title="Settings"
@@ -23,7 +23,7 @@ const HomeFiltersDetail: FunctionComponent = observer(() => {
         edit filters
       </Link>
     </div>
-  );
+  ) : null;
 });
 
 export default HomeFiltersDetail;

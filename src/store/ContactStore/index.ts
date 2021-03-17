@@ -10,7 +10,7 @@ import { IContactStore, LoadContactsParams } from './types';
 
 export * from './types';
 
-const CONTACTS_LIMIT = 100;
+const CONTACTS_LIMIT = 1000;
 
 export class ContactStore implements IContactStore {
   contacts: IContact[] = [];
