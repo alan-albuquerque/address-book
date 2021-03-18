@@ -2,6 +2,7 @@ import { concatNotEmpty } from '@src/utils/array';
 import classNames from 'classnames';
 import React, { FunctionComponent, HTMLAttributes, memo } from 'react';
 import { FaUser } from 'react-icons/fa';
+import LazyLoad from 'react-lazyload';
 
 export interface ContactItemProps extends HTMLAttributes<HTMLDivElement> {
   firstName?: string;
@@ -37,6 +38,17 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
       className,
     );
 
+    function renderPicturePlaceHolder() {
+      return (
+        <div
+          className="text-4xl text-gray-400"
+          data-testid="userPicturePlaceholder"
+        >
+          <FaUser />
+        </div>
+      );
+    }
+
     return (
       <div
         className={classNameList}
@@ -56,19 +68,20 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
             "
             >
               {pictureUrl ? (
-                <img
-                  src={pictureUrl}
-                  alt={fullName}
-                  className="contact-picture rounded-full h-14 w-14"
-                  data-testid="userPicture"
-                />
-              ) : (
-                <div
-                  className="text-4xl text-gray-400"
-                  data-testid="userPicturePlaceholder"
+                <LazyLoad
+                  once
+                  offset={200}
+                  placeholder={renderPicturePlaceHolder()}
                 >
-                  <FaUser />
-                </div>
+                  <img
+                    src={pictureUrl}
+                    alt={fullName}
+                    className="contact-picture rounded-full h-14 w-14"
+                    data-testid="userPicture"
+                  />
+                </LazyLoad>
+              ) : (
+                renderPicturePlaceHolder()
               )}
             </div>
           </div>
