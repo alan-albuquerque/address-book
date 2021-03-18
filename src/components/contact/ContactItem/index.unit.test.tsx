@@ -12,7 +12,7 @@ const defaultContact: ContactItemProps = {
   firstName: 'UserFirstName',
   lastName: 'User Last Name',
   email: 'mail@example.com',
-  pictureUrl: 'http://img.test/picture.jpg',
+  pictureUrl: 'http://localhost/picture.jpg',
 };
 
 describe('<ContactItem />', () => {
@@ -28,7 +28,6 @@ describe('<ContactItem />', () => {
 
   test('should display a contact, with a profile picture', async () => {
     const { queryByTestId, getByTestId } = renderContactItem(defaultContact);
-
     const placeholderPicture = await queryByTestId('userPicturePlaceholder');
     const userPicture = await getByTestId('userPicture');
     const firstName = await getByTestId('firstName');
@@ -45,9 +44,25 @@ describe('<ContactItem />', () => {
     expect(username).toBeVisible();
     expect(email).toBeVisible();
 
-    expect(firstName.textContent).toEqual(defaultContact.firstName);
-    expect(lastName.textContent).toEqual(defaultContact.lastName);
-    expect(username.textContent).toEqual(defaultContact.username);
-    expect(email.textContent).toEqual(defaultContact.email);
+    expect(firstName).toHaveTextContent(defaultContact.firstName as string);
+    expect(lastName).toHaveTextContent(defaultContact.lastName as string);
+    expect(username).toHaveTextContent(defaultContact.username as string);
+    expect(email).toHaveTextContent(defaultContact.email as string);
+  });
+
+  test('should proper render lazy loading', async () => {
+    const { queryByTestId } = renderContactItem({
+      ...defaultContact,
+      pictureLazyLoad: true,
+    });
+    const pictureLoadingPlaceholder = await queryByTestId(
+      'pictureLoadingPlaceholder',
+    );
+    const placeholderPicture = await queryByTestId('userPicturePlaceholder');
+    const userPicture = await queryByTestId('userPicture');
+
+    expect(pictureLoadingPlaceholder).not.toBeNull();
+    expect(placeholderPicture).toBeNull();
+    expect(userPicture).toBeNull();
   });
 });

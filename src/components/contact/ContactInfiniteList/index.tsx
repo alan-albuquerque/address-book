@@ -49,6 +49,7 @@ const ContactInfiniteList: FunctionComponent<ContactScrollListProps> = ({
         firstName={contact?.firstName}
         email={contact?.email}
         lastName={contact?.lastName}
+        pictureLazyLoad
         clickable
         className="mb-2.5 mx-1"
         onClick={() => onClickContact && onClickContact(contact)}

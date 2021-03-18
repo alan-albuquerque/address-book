@@ -10,6 +10,7 @@ export interface ContactItemProps extends HTMLAttributes<HTMLDivElement> {
   username?: string;
   email?: string;
   pictureUrl?: string;
+  pictureLazyLoad?: boolean;
   clickable?: boolean;
   onClick?: () => void;
 }
@@ -21,6 +22,7 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
     username,
     email,
     pictureUrl,
+    pictureLazyLoad,
     clickable = false,
     className,
     onClick,
@@ -38,14 +40,36 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
       className,
     );
 
-    function renderPicturePlaceHolder() {
+    function renderPicturePlaceHolder(testId: string) {
       return (
-        <div
-          className="text-4xl text-gray-400"
-          data-testid="userPicturePlaceholder"
-        >
+        <div className="text-4xl text-gray-400" data-testid={testId}>
           <FaUser />
         </div>
+      );
+    }
+
+    function renderContactPictureImg() {
+      return (
+        <img
+          src={pictureUrl}
+          alt={fullName}
+          className="contact-picture rounded-full h-14 w-14"
+          data-testid="userPicture"
+        />
+      );
+    }
+
+    function renderContactPicture() {
+      return pictureLazyLoad ? (
+        <LazyLoad
+          once
+          offset={200}
+          placeholder={renderPicturePlaceHolder('pictureLoadingPlaceholder')}
+        >
+          {renderContactPictureImg()}
+        </LazyLoad>
+      ) : (
+        renderContactPictureImg()
       );
     }
 
@@ -67,22 +91,9 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
             overflow-hidden border w-16 h-16
             "
             >
-              {pictureUrl ? (
-                <LazyLoad
-                  once
-                  offset={200}
-                  placeholder={renderPicturePlaceHolder()}
-                >
-                  <img
-                    src={pictureUrl}
-                    alt={fullName}
-                    className="contact-picture rounded-full h-14 w-14"
-                    data-testid="userPicture"
-                  />
-                </LazyLoad>
-              ) : (
-                renderPicturePlaceHolder()
-              )}
+              {pictureUrl
+                ? renderContactPicture()
+                : renderPicturePlaceHolder('userPicturePlaceholder')}
             </div>
           </div>
           <div className="px-2">
