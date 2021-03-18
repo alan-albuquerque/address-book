@@ -33,7 +33,12 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
           text-center text-purple-800 text-xs sm:text-base
           "
         >
-          <Link to="/" title="Home" aria-label="Home page">
+          <Link
+            to="/"
+            title="Home"
+            aria-label="Home page"
+            data-testid="homeLink"
+          >
             Address <span className="font-semibold">Book</span>
           </Link>
         </div>
@@ -44,6 +49,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
               flex justify-center items-center h-full w-full text-2xl
               font-black text-gray-700
               "
+              data-testid="headerTitle"
             >
               {title}
             </h1>
@@ -54,11 +60,18 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
               onChange={setSearchTextState}
               onCancel={clearSearchTextState}
               descriptionSearch="Start typing to search for contacts"
+              data-testid="appSearch"
             />
           )}
         </div>
         <div className="flex flex-row items-center justify-center px-2 w-3/12">
-          <Link to="/" className="mx-1" aria-label="Home page" title="Home">
+          <Link
+            to="/"
+            className="mx-1"
+            aria-label="Home page"
+            title="Home"
+            data-testid="homeButton"
+          >
             <Button className="h-8 w-8" icon={<FaHome />} />
           </Link>
           <Link
@@ -66,6 +79,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
             className="mx-1"
             aria-label="Settings page"
             title="Settings"
+            data-testid="settingsButton"
           >
             <Button className="h-8 w-8" icon={<FaCog />} />
           </Link>

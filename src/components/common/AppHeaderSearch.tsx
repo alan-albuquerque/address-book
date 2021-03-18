@@ -11,7 +11,7 @@ export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const AppHeaderSearch: FunctionComponent<SearchProps> = props => {
   const {
-    label = 'AppHeaderSearch',
+    label = 'Search',
     name = 'searchInput',
     descriptionSearch,
     value,
