@@ -18,7 +18,7 @@ import React, {
 const Home: FunctionComponent = observer(() => {
   const { contactStore, settingsStore } = useStore();
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [openedContact, setOpenedContact] = useState<IContact>();
+  const [openedContact, setOpenedContact] = useState<Partial<IContact>>();
 
   const loadMore = useCallback(() => {
     if (contactStore.searchTerm) return;

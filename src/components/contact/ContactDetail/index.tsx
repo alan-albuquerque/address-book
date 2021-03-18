@@ -57,55 +57,77 @@ const ContactDetail: FunctionComponent<ContactDetailProps> = memo(
         </div>
         <div>
           <div className="text-xl px-2 pb-3 border-b mb-3 text-center">
-            <span className="text-purple-800" data-testid="firstName">
-              {firstName}
-            </span>
-            <span
-              className="text-purple-800 font-semibold ml-1"
-              data-testid="lastName"
-            >
-              {lastName}
-            </span>
-            <span className="text-gray-500 text-base block">{username} </span>
+            {firstName && (
+              <span className="text-purple-800" data-testid="firstName">
+                {firstName}
+              </span>
+            )}
+            {lastName && (
+              <span
+                className="text-purple-800 font-semibold ml-1"
+                data-testid="lastName"
+              >
+                {lastName}
+              </span>
+            )}
+            {username && (
+              <span className="text-gray-500 text-base block">{username}</span>
+            )}
           </div>
           <div className="px-2 grid grid-cols-1 md:grid-cols-2 gap-x-10">
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">email</div>
-              <span className="text-gray-700" data-testid="email">
-                <a
-                  href={`mailto:${email}`}
-                  title={`Write an email to ${fullName}`}
-                  aria-label={`Write an email to ${fullName}`}
-                  className="text-purple-800 hover:underline"
-                >
-                  {email}
-                </a>
+
+              <span className="text-gray-700">
+                {email ? (
+                  <a
+                    href={`mailto:${email}`}
+                    title={`Write an email to ${fullName}`}
+                    aria-label={`Write an email to ${fullName}`}
+                    className="text-purple-800 hover:underline"
+                    data-testid="email"
+                  >
+                    {email}
+                  </a>
+                ) : (
+                  '-'
+                )}
               </span>
             </div>
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">cell</div>
-              <span className="text-gray-700" data-testid="cell">
-                <a
-                  href={`tel:${cell}`}
-                  title={`Call to ${fullName} cell`}
-                  aria-label={`Call to ${fullName} cell`}
-                  className="text-purple-800 hover:underline"
-                >
-                  {cell}
-                </a>
+              <span className="text-gray-700">
+                {cell ? (
+                  <a
+                    href={`tel:${cell}`}
+                    title={`Call ${fullName}'s cell phone`}
+                    aria-label={`Call ${fullName}'s cell phone`}
+                    className="text-purple-800 hover:underline"
+                    data-testid="cell"
+                  >
+                    {cell}
+                  </a>
+                ) : (
+                  '-'
+                )}
               </span>
             </div>
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">phone</div>
-              <span className="text-gray-700" data-testid="phone">
-                <a
-                  href={`tel:${phone}`}
-                  title={`Call to ${fullName} phone`}
-                  aria-label={`Call to ${fullName} phone`}
-                  className="text-purple-800 hover:underline"
-                >
-                  {phone}
-                </a>
+              <span className="text-gray-700">
+                {phone ? (
+                  <a
+                    href={`tel:${phone}`}
+                    title={`Call ${fullName}'s phone`}
+                    aria-label={`Call ${fullName}'s phone`}
+                    className="text-purple-800 hover:underline"
+                    data-testid="phone"
+                  >
+                    {phone}
+                  </a>
+                ) : (
+                  '-'
+                )}
               </span>
             </div>
           </div>
@@ -114,25 +136,25 @@ const ContactDetail: FunctionComponent<ContactDetailProps> = memo(
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">street</div>
               <span className="text-gray-700" data-testid="street">
-                {street}
+                {street || '-'}
               </span>
             </div>
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">city</div>
               <span className="text-gray-700" data-testid="city">
-                {city}
+                {city || '-'}
               </span>
             </div>
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">state</div>
               <span className="text-gray-700" data-testid="state">
-                {state}
+                {state || '-'}
               </span>
             </div>
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">postcode</div>
               <span className="text-gray-700" data-testid="postcode">
-                {postcode}
+                {postcode || '-'}
               </span>
             </div>
           </div>
