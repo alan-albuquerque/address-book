@@ -1,15 +1,15 @@
-import React, { FunctionComponent, InputHTMLAttributes } from 'react';
 import Button from '@src/components/core/Button';
+import React, { FunctionComponent, InputHTMLAttributes } from 'react';
 import { FaSearch, FaTimesCircle } from 'react-icons/fa';
 
-export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
+export interface AppHeaderSearchProps
+  extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   descriptionSearch?: string;
-  searchText?: string;
-  onCancel: () => void;
+  onCancel?: () => void;
 }
 
-const AppHeaderSearch: FunctionComponent<SearchProps> = props => {
+const AppHeaderSearch: FunctionComponent<AppHeaderSearchProps> = props => {
   const {
     label = 'Search',
     name = 'searchInput',
@@ -38,6 +38,7 @@ const AppHeaderSearch: FunctionComponent<SearchProps> = props => {
         <label
           htmlFor={name}
           className="my-auto mx-1 px-2.5 pr-0 text-gray-500"
+          data-testid="searchIcon"
         >
           <FaSearch />
         </label>
@@ -48,11 +49,12 @@ const AppHeaderSearch: FunctionComponent<SearchProps> = props => {
         id={name}
         className="flex-grow p-3 outline-none rounded-3xl w-full"
         placeholder={label}
-        value={value}
         autoCorrect="off"
         aria-autocomplete="list"
+        value={value}
         spellCheck={false}
         aria-describedby="descriptionSearch"
+        data-testid="searchInput"
         {...rest}
       />
       {value && (
@@ -63,6 +65,7 @@ const AppHeaderSearch: FunctionComponent<SearchProps> = props => {
             onClick={cancelSearch}
             aria-label="Clear search"
             title="Clear search"
+            data-testid="cancelIcon"
           />
         </div>
       )}
