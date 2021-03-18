@@ -14,7 +14,7 @@ const ContactList: FunctionComponent<ContactListProps> = props => {
     className,
   );
   return (
-    <div className={classNameList} {...rest}>
+    <div className={classNameList} {...rest} data-testid="contactListRootEl">
       {children}
     </div>
   );
