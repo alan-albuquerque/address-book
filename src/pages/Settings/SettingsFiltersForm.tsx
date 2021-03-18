@@ -24,7 +24,7 @@ const SettingsFiltersForm: FunctionComponent = observer(() => {
 
   return (
     <div>
-      <h2 className="font-semibold border-b-2 my-3">Filters</h2>
+      <h2 className="font-semibold border-b my-3">Filters</h2>
       <label htmlFor="country" className="text-sm">
         Country
       </label>
@@ -36,6 +36,7 @@ const SettingsFiltersForm: FunctionComponent = observer(() => {
         isMulti
         value={countrySelectedOptions}
         closeMenuOnSelect={false}
+        className="text-purple-800"
       />
     </div>
   );

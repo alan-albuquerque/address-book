@@ -1,5 +1,5 @@
-import AppHeader from '@src/components/AppHeader';
-import Layout from '@src/components/core/layout/Layout';
+import AppHeader from '@src/components/common/AppHeader';
+import Layout from '@src/components/core/Layout';
 import SettingsFiltersForm from '@src/pages/Settings/SettingsFiltersForm';
 import React, { FunctionComponent } from 'react';
 

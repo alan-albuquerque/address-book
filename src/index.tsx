@@ -1,8 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/main.scss';
+import ReactModal from 'react-modal';
 import App from './App';
+import './assets/main.scss';
 import { store, StoreProvider } from './store';
+
+ReactModal.setAppElement('#root');
 
 ReactDOM.render(
   <React.StrictMode>

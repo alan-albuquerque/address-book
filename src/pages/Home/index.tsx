@@ -1,14 +1,24 @@
-import AppHeader from '@src/components/AppHeader';
-import ContactInfiniteList from '@src/components/ContactInfiniteList';
-import Layout from '@src/components/core/layout/Layout';
+import AppHeader from '@src/components/common/AppHeader';
+import ContactDetail from '@src/components/contact/ContactDetail';
+import ContactInfiniteList from '@src/components/contact/ContactInfiniteList';
+import Layout from '@src/components/core/Layout';
 import Loading from '@src/components/core/Loading';
+import Modal from '@src/components/core/Modal';
+import { IContact } from '@src/domain/Contact';
 import HomeFiltersDetail from '@src/pages/Home/HomeFiltersDetail';
 import { useStore } from '@src/store';
 import { observer } from 'mobx-react-lite';
-import React, { FunctionComponent, useCallback, useEffect } from 'react';
+import React, {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 const Home: FunctionComponent = observer(() => {
   const { contactStore, settingsStore } = useStore();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [openedContact, setOpenedContact] = useState<IContact>();
 
   const loadMore = useCallback(() => {
     if (contactStore.searchTerm) return;
@@ -26,9 +36,22 @@ const Home: FunctionComponent = observer(() => {
     }
   }, [contactStore, loadMore]);
 
-  const onSearch = (searchTerm: string) => {
+  function onSearch(searchTerm: string) {
     contactStore.searchTerm = searchTerm;
-  };
+  }
+
+  function closeModal() {
+    setModalIsOpen(false);
+  }
+
+  function openModal() {
+    setModalIsOpen(true);
+  }
+
+  const onClickContact = useCallback((contact: IContact) => {
+    setOpenedContact(contact);
+    openModal();
+  }, []);
 
   return (
     <Layout>
@@ -40,6 +63,7 @@ const Home: FunctionComponent = observer(() => {
           contacts={contactStore.filteredContacts}
           hasMore={contactStore.hasMore}
           loadMore={loadMore}
+          onClickContact={onClickContact}
         />
         {contactStore.loadingState === 'pending' && (
           <div className="flex flex-row p-4 justify-center items-center">
@@ -66,6 +90,9 @@ const Home: FunctionComponent = observer(() => {
             </div>
           )}
       </div>
+      <Modal title="Contact" isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <ContactDetail contact={openedContact} />
+      </Modal>
     </Layout>
   );
 });

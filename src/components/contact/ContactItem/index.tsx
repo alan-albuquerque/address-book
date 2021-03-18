@@ -1,3 +1,4 @@
+import { concatNotEmpty } from '@src/utils/array';
 import classNames from 'classnames';
 import React, { FunctionComponent, HTMLAttributes, memo } from 'react';
 import { FaUser } from 'react-icons/fa';
@@ -9,6 +10,7 @@ export interface ContactItemProps extends HTMLAttributes<HTMLDivElement> {
   email?: string;
   pictureUrl?: string;
   clickable?: boolean;
+  onClick?: () => void;
 }
 
 const ContactItem: FunctionComponent<ContactItemProps> = memo(
@@ -20,11 +22,11 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
     pictureUrl,
     clickable = false,
     className,
+    onClick,
     ...rest
   }) => {
-    const fullName = [firstName, lastName].filter(Boolean).join(' ');
+    const fullName = concatNotEmpty([firstName, lastName]);
     const contactBoxLabel = `${fullName}'s contact card`;
-
     const classNameList = classNames(
       'flex',
       'p-0.5',
@@ -36,20 +38,28 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
     );
 
     return (
-      <div className={classNameList} aria-label={contactBoxLabel} {...rest}>
+      <div
+        className={classNameList}
+        aria-label={contactBoxLabel}
+        {...rest}
+        onClick={onClick}
+        onKeyDown={onClick}
+        role="button"
+        tabIndex={0}
+      >
         <div className="flex flex-row">
           <div>
             <div
               className="
             flex justify-center items-center p-0.5 rounded-full
-            overflow-hidden border hover:bg-purple-800 w-16 h-16
+            overflow-hidden border w-16 h-16
             "
             >
               {pictureUrl ? (
                 <img
                   src={pictureUrl}
                   alt={fullName}
-                  className="contact-picture rounded-full"
+                  className="contact-picture rounded-full h-14 w-14"
                   data-testid="userPicture"
                 />
               ) : (

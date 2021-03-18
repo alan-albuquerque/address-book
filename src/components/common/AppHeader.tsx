@@ -1,6 +1,6 @@
 import Button from '@src/components/core/Button';
-import Header from '@src/components/core/layout/Header';
-import Search from '@src/components/Search';
+import Header from '@src/components/core/Header';
+import AppHeaderSearch from '@src/components/common/AppHeaderSearch';
 import React, { FunctionComponent } from 'react';
 import { FaHome, FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -49,7 +49,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
             </h1>
           )}
           {onSearch && (
-            <Search
+            <AppHeaderSearch
               value={searchTerm}
               onChange={setSearchTextState}
               onCancel={clearSearchTextState}

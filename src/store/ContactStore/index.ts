@@ -91,7 +91,15 @@ export class ContactStore implements IContactStore {
         firstName: user?.name?.first,
         lastName: user?.name?.last,
         pictureUrl: user?.picture?.thumbnail,
+        pictureMediumUrl: user?.picture?.medium,
         username: user?.login?.username,
+        phone: user?.phone,
+        cell: user?.cell,
+        streetName: user?.location?.street?.name,
+        streetNumber: user?.location?.street?.number,
+        city: user?.location?.city,
+        state: user?.location?.state,
+        postcode: user?.location?.postcode,
       })) || []
     );
   }

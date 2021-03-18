@@ -9,9 +9,9 @@ export interface SearchProps extends InputHTMLAttributes<HTMLInputElement> {
   onCancel: () => void;
 }
 
-const Search: FunctionComponent<SearchProps> = props => {
+const AppHeaderSearch: FunctionComponent<SearchProps> = props => {
   const {
-    label = 'Search',
+    label = 'AppHeaderSearch',
     name = 'searchInput',
     descriptionSearch,
     value,
@@ -75,4 +75,4 @@ const Search: FunctionComponent<SearchProps> = props => {
   );
 };
 
-export default Search;
+export default AppHeaderSearch;

@@ -15,11 +15,26 @@ export interface IRandomUserLogin {
   uuid: string;
 }
 
+export interface IRandomUserStreet {
+  name: string;
+  number: number;
+}
+
+export interface IRandomUserLocation {
+  street: IRandomUserStreet;
+  city: string;
+  state: string;
+  postcode: string;
+}
+
 export interface IRandomUser {
   name: IRandomUserName;
   email: string;
+  phone: string;
+  cell: string;
   login: IRandomUserLogin;
   picture: IRandomUserPicture;
+  location: IRandomUserLocation;
 }
 
 export interface IRandomUserResponseInfo {
