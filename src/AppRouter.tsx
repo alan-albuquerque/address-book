@@ -1,18 +1,22 @@
-import React, { ReactElement } from 'react';
+import Loading from '@src/components/core/Loading';
+import React, { ReactElement, Suspense } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from '@src/pages/Home';
-import Settings from '@src/pages/Settings';
+
+const Settings = React.lazy(() => import('@src/pages/Settings'));
+const Home = React.lazy(() => import('@src/pages/Home'));
 
 function AppRouter(): ReactElement {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/settings">
-          <Settings />
-        </Route>
+        <Suspense fallback={<Loading />}>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/settings">
+            <Settings />
+          </Route>
+        </Suspense>
       </Switch>
     </Router>
   );
