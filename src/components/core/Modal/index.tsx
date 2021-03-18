@@ -33,7 +33,7 @@ const Modal: FunctionComponent<ModalProps> = ({
           />
         </div>
       </div>
-      {children}
+      <div className="app-modal__content">{children}</div>
     </ReactModal>
   );
 };

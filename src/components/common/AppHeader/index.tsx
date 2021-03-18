@@ -30,7 +30,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
         <div
           className="
           flex flex-row justify-center items-center w-3/12 m-auto px-1.5
-          text-center text-purple-800 text-xs sm:text-base
+          text-center text-purple-800 text-base
           "
         >
           <Link

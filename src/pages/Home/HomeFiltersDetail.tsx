@@ -8,14 +8,20 @@ const HomeFiltersDetail: FunctionComponent = observer(() => {
 
   return settingsStore.selectedCountries?.length ? (
     <div className="flex items-center px-1 py-3 text-sm">
-      <span className="mr-2">Filtering contacts from countries:</span>
-      {settingsStore.selectedCountries.map(value => (
-        <span className="mr-2 bg-purple-200 p-1 rounded-md" key={value}>
-          {value}
+      <div className="flex flex-col">
+        <span className="mr-2 text-xs text-gray-700">
+          Showing contacts from countries:
         </span>
-      ))}
+        <div className="my-3">
+          {settingsStore.selectedCountries.map(value => (
+            <span className="mr-2 bg-purple-200 p-1 rounded-md" key={value}>
+              {value}
+            </span>
+          ))}
+        </div>
+      </div>
       <Link
-        className="ml-auto text-xs font-semibold hover:text-purple-800"
+        className="ml-auto text-xs font-semibold hover:text-purple-800 w-20"
         to="/settings"
         aria-label="Settings page"
         title="Settings"

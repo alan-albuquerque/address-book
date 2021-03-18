@@ -56,7 +56,7 @@ const Home: FunctionComponent = observer(() => {
   return (
     <Layout>
       <AppHeader searchTerm={contactStore.searchTerm} onSearch={onSearch} />
-      <div className="max-w-lg mx-auto">
+      <div className="max-w-lg mx-auto px-2">
         <HomeFiltersDetail />
         <ContactInfiniteList
           loading={contactStore.loadingState === 'pending'}
