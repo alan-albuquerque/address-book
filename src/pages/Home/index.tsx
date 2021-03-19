@@ -70,25 +70,31 @@ const Home: FunctionComponent = observer(() => {
             <Loading>loading...</Loading>
           </div>
         )}
-        {contactStore.loadingState !== 'pending' && !contactStore.hasMore && (
-          <div className="flex flex-row p-4 justify-center items-center">
-            <div>end of users catalog</div>
+        {contactStore.loadingState === 'success' && !contactStore.hasMore && (
+          <div className="p-4 text-center text-gray-700 ">
+            end of users catalog
           </div>
         )}
         {contactStore.searchTerm &&
           contactStore.hasMore &&
           !contactStore.filteredContacts.length && (
-            <div className="flex flex-row p-4 justify-center items-center text-gray-700 font-semibold">
+            <div className="p-4 text-center text-gray-700 font-semibold">
               Your search did not match any contacts
             </div>
           )}
         {contactStore.searchTerm &&
           contactStore.hasMore &&
           contactStore.contacts.length && (
-            <div className="flex flex-row p-4 justify-center items-center text-gray-700">
+            <div className="p-4 text-center text-gray-700">
               contacts loading paused while searching
             </div>
           )}
+        {contactStore.loadingState === 'error' && (
+          <div className="p-4 text-center text-red-800 ">
+            An error occurred while requesting the contact list, please try
+            again.
+          </div>
+        )}
       </div>
       <Modal title="Contact" isOpen={modalIsOpen} onRequestClose={closeModal}>
         <ContactDetail contact={openedContact} />
