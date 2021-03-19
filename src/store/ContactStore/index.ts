@@ -58,6 +58,7 @@ export class ContactStore implements IContactStore {
         page,
         results: limit,
         nat: countries?.join(','),
+        inc: 'login,email,name,picture,login,phone,cell,location',
       })
       .then(resp => this.loadContactsSuccessHandler(resp, limit))
       .catch(this.errorHandler.bind(this));

@@ -51,6 +51,7 @@ export interface IRandomUserResponse<T> {
 
 export interface IRandomUserFilterParams {
   nat?: string;
+  inc?: string;
 }
 
 export interface IRandomUserPaginateParams extends IRandomUserFilterParams {
