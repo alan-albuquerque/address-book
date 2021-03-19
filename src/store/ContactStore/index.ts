@@ -41,6 +41,8 @@ export class ContactStore implements IContactStore {
   }
 
   get filteredContacts(): IContact[] {
+    if (!this.contacts) return [];
+    if (!this.searchTerm?.trim()) return this.contacts;
     return this.contacts.filter(contact => {
       return `${contact.firstName} ${contact.lastName}`
         .toLowerCase()
@@ -58,7 +60,7 @@ export class ContactStore implements IContactStore {
         nat: countries?.join(','),
       })
       .then(resp => this.loadContactsSuccessHandler(resp, limit))
-      .catch(this.errorHandler);
+      .catch(this.errorHandler.bind(this));
   }
 
   private loadContactsSuccessHandler(
