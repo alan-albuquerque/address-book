@@ -6,7 +6,7 @@ const Loading: FunctionComponent = props => {
 
   return (
     <div className="flex flex-row items-center">
-      <FaSpinner className="animate-spin" />
+      <FaSpinner className="animate-spin" data-testid="loadingIcon" />
       {children && <div className="ml-2">{children}</div>}
     </div>
   );
