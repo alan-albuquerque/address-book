@@ -35,7 +35,6 @@ describe('<AppHeader />', () => {
     const homeLink = await getByTestId('homeLink');
     const headerTitle = await queryByTestId('headerTitle');
     const appSearch = await queryByTestId('appSearch');
-    const homeButton = await queryByTestId('homeButton');
     const settingsButton = await queryByTestId('settingsButton');
 
     expect(homeLink).toHaveAttribute('title', 'Home');
@@ -45,10 +44,6 @@ describe('<AppHeader />', () => {
 
     expect(headerTitle).toBeNull();
     expect(appSearch).toBeNull();
-
-    expect(homeButton).not.toBeNull();
-    expect(homeButton).toHaveAttribute('href', '/');
-    expect(homeButton).not.toBeEmptyDOMElement();
 
     expect(settingsButton).not.toBeNull();
     expect(settingsButton).toHaveAttribute('href', '/settings');
@@ -77,15 +72,6 @@ describe('<AppHeader />', () => {
     await fireEvent.click(homeLink);
     history.push('/test');
     await fireEvent.click(homeLink);
-    expect(history.location.pathname).toEqual('/');
-  });
-
-  test('should navigates home when clicks the home button', async () => {
-    const history = createMemoryHistory();
-    const { getByTestId } = renderAppHeaderWithRoute({}, history);
-    const homeButton = await getByTestId('homeButton');
-    history.push('/test');
-    await fireEvent.click(homeButton);
     expect(history.location.pathname).toEqual('/');
   });
 

@@ -79,7 +79,13 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
         aria-label={contactBoxLabel}
         {...rest}
         onClick={onClick}
-        onKeyDown={onClick}
+        // accessibility
+        onKeyDown={e => {
+          if (['Enter', ' '].includes(e.key) && onClick) {
+            e.preventDefault();
+            onClick();
+          }
+        }}
         role="button"
         tabIndex={0}
       >

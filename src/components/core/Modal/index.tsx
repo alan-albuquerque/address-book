@@ -32,6 +32,7 @@ const Modal: FunctionComponent<ModalProps> = ({
             aria-label="Close modal"
             title="Close modal"
             data-testid="closeButton"
+            tabIndex={0}
           />
         </div>
       </div>

@@ -1,8 +1,8 @@
+import AppHeaderSearch from '@src/components/common/AppHeaderSearch';
 import Button from '@src/components/core/Button';
 import Header from '@src/components/core/Header';
-import AppHeaderSearch from '@src/components/common/AppHeaderSearch';
 import React, { FunctionComponent } from 'react';
-import { FaHome, FaCog } from 'react-icons/fa';
+import { FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 export interface AppHeaderProps {
@@ -66,22 +66,13 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
         </div>
         <div className="flex flex-row items-center justify-center px-2 w-3/12">
           <Link
-            to="/"
-            className="mx-1"
-            aria-label="Home page"
-            title="Home"
-            data-testid="homeButton"
-          >
-            <Button className="h-8 w-8" icon={<FaHome />} />
-          </Link>
-          <Link
             to="/settings"
             className="mx-1"
             aria-label="Settings page"
             title="Settings"
             data-testid="settingsButton"
           >
-            <Button className="h-8 w-8" icon={<FaCog />} />
+            <Button className="h-8 w-8" tabIndex={-1} icon={<FaCog />} />
           </Link>
         </div>
       </div>

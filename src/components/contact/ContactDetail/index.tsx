@@ -32,7 +32,7 @@ const ContactDetail: FunctionComponent<ContactDetailProps> = memo(
     const street = concatNotEmpty([streetNumber, streetName], ', ');
 
     return (
-      <div className="flex flex-col justify-center items-center p-2 md:p-6">
+      <div className="flex flex-col justify-center items-center p-6">
         <div
           className="
             flex justify-center items-center p-0.5 rounded-full
@@ -74,7 +74,7 @@ const ContactDetail: FunctionComponent<ContactDetailProps> = memo(
               <span className="text-gray-500 text-base block">{username}</span>
             )}
           </div>
-          <div className="px-2 grid grid-cols-1 md:grid-cols-2 gap-x-10">
+          <div className="px-2 grid grid-cols-1 sm:grid-cols-2 gap-x-10">
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">email</div>
 
@@ -132,7 +132,7 @@ const ContactDetail: FunctionComponent<ContactDetailProps> = memo(
             </div>
           </div>
           <h2 className="font-semibold border-b my-3">Address</h2>
-          <div className="px-2 grid grid-cols-1 md:grid-cols-2 gap-x-10">
+          <div className="px-2 grid grid-cols-1 sm:grid-cols-2 gap-x-10">
             <div className="my-2">
               <div className="text-xs font-semibold uppercase">street</div>
               <span className="text-gray-700" data-testid="street">

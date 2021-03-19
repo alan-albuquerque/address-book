@@ -9,6 +9,10 @@
   transform: translate(-50%, -50%);
   border-radius: 1em;
   cursor: default;
+  max-height: 95vh;
+  max-width: 95vh;
+  display: flex;
+  flex-direction: column;
 
   &:focus {
     outline: none;
@@ -21,7 +25,6 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    cursor: zoom-out;
   }
 
   &__header {
@@ -36,10 +39,6 @@
 
   &__content {
     overflow-y: scroll;
-  }
-
-  &__title {
-
   }
 
   &__close-btn {

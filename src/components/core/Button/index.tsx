@@ -1,5 +1,5 @@
-import React, { ButtonHTMLAttributes, FunctionComponent } from 'react';
 import classNames from 'classnames';
+import React, { ButtonHTMLAttributes, FunctionComponent } from 'react';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: React.ReactElement;
@@ -7,7 +7,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: FunctionComponent<ButtonProps> = props => {
-  const { type, icon, children, className, role, ...rest } = props;
+  const { icon, children, className, role, ...rest } = props;
 
   const buttonClassNames = classNames(
     'flex',
@@ -20,16 +20,12 @@ const Button: FunctionComponent<ButtonProps> = props => {
     'rounded-3xl',
     'hover:bg-gray-200',
     'active:bg-gray-300',
-    'focus:outline-none',
     className,
   );
 
-  /* eslint-disable react/button-has-type */
-  // 'react/button-has-type' rule requires the 'type' property to be a static string,
-  // but this does not work if we are creating an abstract button component
   return (
     <button
-      type={type || 'button'}
+      type="button"
       className={buttonClassNames}
       role={role || 'button'}
       {...rest}
@@ -42,7 +38,6 @@ const Button: FunctionComponent<ButtonProps> = props => {
       )}
     </button>
   );
-  /* eslint-enable react/button-has-type */
 };
 
 export default Button;
