@@ -36,8 +36,7 @@ describe('<ContactItem />', () => {
     const email = await getByTestId('email');
 
     expect(placeholderPicture).toBeNull();
-    expect(userPicture.getAttribute('src')).toEqual(defaultContact.pictureUrl);
-    expect(userPicture.getAttribute('src')).toEqual(defaultContact.pictureUrl);
+    expect(userPicture).toHaveAttribute('src', defaultContact.pictureUrl);
 
     expect(firstName).toBeVisible();
     expect(lastName).toBeVisible();

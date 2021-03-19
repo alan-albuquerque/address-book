@@ -38,21 +38,21 @@ describe('<AppHeader />', () => {
     const homeButton = await queryByTestId('homeButton');
     const settingsButton = await queryByTestId('settingsButton');
 
-    expect(homeLink.getAttribute('title')).toEqual('Home');
-    expect(homeLink.getAttribute('aria-label')).toEqual('Home page');
-    expect(homeLink.getAttribute('href')).toEqual('/');
-    expect(homeLink.textContent).toEqual('Address Book');
+    expect(homeLink).toHaveAttribute('title', 'Home');
+    expect(homeLink).toHaveAttribute('aria-label', 'Home page');
+    expect(homeLink).toHaveAttribute('href', '/');
+    expect(homeLink).toHaveTextContent('Address Book');
 
     expect(headerTitle).toBeNull();
     expect(appSearch).toBeNull();
 
     expect(homeButton).not.toBeNull();
-    expect(homeButton?.getAttribute('href')).toEqual('/');
-    expect(homeButton?.innerHTML?.trim() || '').not.toEqual('');
+    expect(homeButton).toHaveAttribute('href', '/');
+    expect(homeButton).not.toBeEmptyDOMElement();
 
     expect(settingsButton).not.toBeNull();
-    expect(settingsButton?.getAttribute('href')).toEqual('/settings');
-    expect(settingsButton?.innerHTML?.trim() || '').not.toEqual('');
+    expect(settingsButton).toHaveAttribute('href', '/settings');
+    expect(settingsButton).not.toBeEmptyDOMElement();
   });
 
   test('should proper render with a title', async () => {
@@ -60,7 +60,7 @@ describe('<AppHeader />', () => {
 
     const headerTitle = await getByTestId('headerTitle');
 
-    expect(headerTitle.textContent).toEqual(defaultProps.title);
+    expect(headerTitle).toHaveTextContent(defaultProps.title as string);
   });
 
   test('should proper render with a search callback', async () => {
@@ -68,13 +68,6 @@ describe('<AppHeader />', () => {
     const appSearch = await queryByTestId('appSearch');
 
     expect(appSearch).not.toBeNull();
-  });
-
-  test('should navigates home when clicks the logo', async () => {
-    const { getByTestId } = renderAppHeader();
-    const homeLink = await getByTestId('homeLink');
-    await fireEvent.click(homeLink);
-    expect(document.location.href).toEqual('http://localhost/');
   });
 
   test('should navigates home when clicks the logo', async () => {

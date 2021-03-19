@@ -6,7 +6,6 @@ import './index.scss';
 
 export interface ModalProps extends ReactModal.Props {
   title?: ReactNode;
-  onClose?: () => void;
 }
 
 const Modal: FunctionComponent<ModalProps> = ({
@@ -23,17 +22,22 @@ const Modal: FunctionComponent<ModalProps> = ({
       {...rest}
     >
       <div className="app-modal__header">
-        <div className="app-modal__title">{title}</div>
+        <div className="app-modal__title" data-testid="modalTitle">
+          {title}
+        </div>
         <div className="app-modal__close-btn">
           <Button
             icon={<FaTimesCircle />}
             onClick={onRequestClose}
             aria-label="Close modal"
             title="Close modal"
+            data-testid="closeButton"
           />
         </div>
       </div>
-      <div className="app-modal__content">{children}</div>
+      <div className="app-modal__content" data-testid="content">
+        {children}
+      </div>
     </ReactModal>
   );
 };

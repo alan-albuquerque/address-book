@@ -59,11 +59,13 @@ describe('<ContactDetail />', () => {
     const email = await getByTestId('email');
 
     expect(email).toHaveTextContent(contact?.email as string);
-    expect(email.getAttribute('href')).toEqual(`mailto:${contact?.email}`);
-    expect(email.getAttribute('title')).toEqual(
+    expect(email).toHaveAttribute('href', `mailto:${contact?.email}`);
+    expect(email).toHaveAttribute(
+      'title',
       `Write an email to ${contact?.firstName} ${contact?.lastName}`,
     );
-    expect(email.getAttribute('aria-label')).toEqual(
+    expect(email).toHaveAttribute(
+      'aria-label',
       `Write an email to ${contact?.firstName} ${contact?.lastName}`,
     );
   });
@@ -75,11 +77,13 @@ describe('<ContactDetail />', () => {
     const cell = await getByTestId('cell');
 
     expect(cell).toHaveTextContent(contact?.cell as string);
-    expect(cell.getAttribute('href')).toEqual(`tel:${contact?.cell}`);
-    expect(cell.getAttribute('title')).toEqual(
+    expect(cell).toHaveAttribute('href', `tel:${contact?.cell}`);
+    expect(cell).toHaveAttribute(
+      'title',
       `Call ${contact?.firstName} ${contact?.lastName}'s cell phone`,
     );
-    expect(cell.getAttribute('aria-label')).toEqual(
+    expect(cell).toHaveAttribute(
+      'aria-label',
       `Call ${contact?.firstName} ${contact?.lastName}'s cell phone`,
     );
   });
@@ -91,11 +95,13 @@ describe('<ContactDetail />', () => {
     const phone = await getByTestId('phone');
 
     expect(phone).toHaveTextContent(contact?.phone as string);
-    expect(phone.getAttribute('href')).toEqual(`tel:${contact?.phone}`);
-    expect(phone.getAttribute('title')).toEqual(
+    expect(phone).toHaveAttribute('href', `tel:${contact?.phone}`);
+    expect(phone).toHaveAttribute(
+      'title',
       `Call ${contact?.firstName} ${contact?.lastName}'s phone`,
     );
-    expect(phone.getAttribute('aria-label')).toEqual(
+    expect(phone).toHaveAttribute(
+      'aria-label',
       `Call ${contact?.firstName} ${contact?.lastName}'s phone`,
     );
   });

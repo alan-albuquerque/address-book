@@ -19,7 +19,7 @@ describe('<AppHeaderSearch />', () => {
     const { getByTestId, queryByTestId } = renderAppHeaderSearch();
     const searchIcon = await getByTestId('searchIcon');
     const cancelIcon = await queryByTestId('cancelIcon');
-    expect(searchIcon.innerHTML?.trim() || '').not.toEqual('');
+    expect(searchIcon).not.toBeEmptyDOMElement();
     expect(cancelIcon).toBeNull();
   });
 
@@ -43,10 +43,10 @@ describe('<AppHeaderSearch />', () => {
     expect(searchInput.getAttribute('aria-describedby')).toEqual(
       'descriptionSearch',
     );
-    expect(searchInput.getAttribute('placeholder')).toEqual(props.label);
-    expect(searchInput.getAttribute('autoCorrect')).toEqual('off');
-    expect(searchInput.getAttribute('aria-autocomplete')).toEqual('list');
-    expect(searchInput.getAttribute('spellCheck')).toEqual('false');
+    expect(searchInput).toHaveAttribute('placeholder', props.label);
+    expect(searchInput).toHaveAttribute('autoCorrect', 'off');
+    expect(searchInput).toHaveAttribute('spellCheck', 'false');
+    expect(searchInput).toHaveAttribute('aria-autocomplete', 'list');
   });
 
   test('should proper call cancel search', async () => {
