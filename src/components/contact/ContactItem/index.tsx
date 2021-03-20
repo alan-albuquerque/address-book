@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import React, { FunctionComponent, HTMLAttributes, memo } from 'react';
 import { FaUser } from 'react-icons/fa';
 import LazyLoad from 'react-lazyload';
+import './index.scss';
 
 export interface ContactItemProps extends HTMLAttributes<HTMLDivElement> {
   firstName?: string;
@@ -31,6 +32,7 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
     const fullName = concatNotEmpty([firstName, lastName]);
     const contactBoxLabel = `${fullName}'s contact card`;
     const classNameList = classNames(
+      'contact-item',
       'flex',
       'p-0.5',
       'sm:p-1.5',
@@ -53,7 +55,7 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
         <img
           src={pictureUrl}
           alt={fullName}
-          className="contact-picture rounded-full h-full w-full"
+          className="contact-picture rounded-full"
           data-testid="userPicture"
         />
       );
@@ -64,13 +66,6 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
         <LazyLoad
           once
           offset={400}
-          style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
           placeholder={renderPicturePlaceHolder('pictureLoadingPlaceholder')}
         >
           {renderContactPictureImg()}
@@ -100,8 +95,8 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
           <div>
             <div
               className="
-            flex justify-center items-center p-0.5 rounded-full
-            overflow-hidden border w-16 h-16
+            flex justify-center items-center p-0.5 mt-1 rounded-full
+            overflow-hidden border w-14 h-14
             "
             >
               {pictureUrl
@@ -109,7 +104,7 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
                 : renderPicturePlaceHolder('userPicturePlaceholder')}
             </div>
           </div>
-          <div className="px-2">
+          <div className="px-2 long-text-break">
             <div>
               <span className="text-purple-800" data-testid="firstName">
                 {firstName}

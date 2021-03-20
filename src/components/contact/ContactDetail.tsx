@@ -55,7 +55,7 @@ const ContactDetail: FunctionComponent<ContactDetailProps> = memo(
             </div>
           )}
         </div>
-        <div>
+        <div className="long-text-break">
           <div className="text-xl px-2 pb-3 border-b mb-3 text-center">
             {firstName && (
               <span className="text-purple-800" data-testid="firstName">
