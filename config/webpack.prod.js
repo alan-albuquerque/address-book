@@ -5,6 +5,8 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
+const PurgecssPlugin = require('purgecss-webpack-plugin');
+const glob = require('glob-all');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -66,6 +68,18 @@ module.exports = merge(common, {
     }),
     new ESLintPlugin({
       extensions: ['js', 'jsx', 'ts', 'tsx'],
+    }),
+    new PurgecssPlugin({
+      paths: glob.sync(
+        [
+          `${paths.public}/*.html`,
+          `${paths.src}/**/*.html`,
+          `${paths.src}/**/*.tsx`,
+          `${paths.src}/**/*.ts`,
+        ],
+        { nodir: true },
+      ),
+      defaultExtractor: content => content.match(/[A-Za-z0-9-._:/]+/g) || [],
     }),
   ],
   performance: {

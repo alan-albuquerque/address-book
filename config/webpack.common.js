@@ -50,7 +50,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      "@src": paths.src
+      '@src': paths.src,
     },
     extensions: ['.tsx', '.ts', '.js'],
   },
@@ -71,5 +71,5 @@ module.exports = {
     new ForkTsCheckerWebpackPlugin({
       async: false,
     }),
-  ]
+  ],
 };
