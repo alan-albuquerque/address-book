@@ -1,4 +1,4 @@
-import { concatNotEmpty } from '../array';
+import { concatNotEmpty } from '@src/utils/array';
 
 describe('utils:array', () => {
   describe('concatNotEmpty', () => {

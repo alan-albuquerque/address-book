@@ -1,19 +1,17 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import Loading from './index';
+import Header from '@src/components/core/Header';
 
-describe('<Loading />', () => {
+describe('<Header />', () => {
   test('should proper render with a children', async () => {
     const { getByTestId } = render(
-      <Loading>
+      <Header>
         <div data-testid="testDiv" title="test div">
           test content
         </div>
-      </Loading>,
+      </Header>,
     );
     const testDiv = getByTestId('testDiv');
-    const loadingIcon = getByTestId('loadingIcon');
-    expect(loadingIcon).not.toBeNull();
     expect(testDiv).not.toBeNull();
     expect(testDiv.getAttribute('title')).toEqual('test div');
     expect(testDiv).toHaveTextContent('test content');

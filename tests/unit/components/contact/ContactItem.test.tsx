@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { render } from '@testing-library/react';
-import ContactItem, { ContactItemProps } from './index';
+import ContactItem, {
+  ContactItemProps,
+} from '@src/components/contact/ContactItem';
 
 const renderContactItem = (props: Partial<ContactItemProps> = {}) => {
   return render(<ContactItem {...props} />);

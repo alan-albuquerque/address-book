@@ -1,7 +1,9 @@
 import React from 'react';
 
 import { render } from '@testing-library/react';
-import ContactList, { ContactListProps } from './index';
+import ContactList, {
+  ContactListProps,
+} from '@src/components/contact/ContactList';
 
 const renderContactList = (props: Partial<ContactListProps> = {}) => {
   return render(<ContactList {...props} />);

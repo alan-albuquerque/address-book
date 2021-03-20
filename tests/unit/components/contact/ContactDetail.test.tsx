@@ -1,6 +1,8 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import ContactDetail, { ContactDetailProps } from './index';
+import ContactDetail, {
+  ContactDetailProps,
+} from '@src/components/contact/ContactDetail';
 
 const renderContactDetail = (props: ContactDetailProps = { contact: {} }) => {
   return render(<ContactDetail {...props} />);

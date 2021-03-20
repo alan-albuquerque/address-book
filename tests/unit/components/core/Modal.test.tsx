@@ -1,6 +1,6 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import Modal, { ModalProps } from './index';
+import Modal, { ModalProps } from '@src/components/core/Modal';
 
 const renderModal = (props: ModalProps = { isOpen: true }) => {
   const currentDiv = document.createElement('div');

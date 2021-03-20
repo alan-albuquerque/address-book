@@ -3,7 +3,7 @@ import {
   IRandomUser,
   randomUserService,
 } from '@src/services/RandomUserService';
-import { ContactStore } from '@src/store/ContactStore/index';
+import { ContactStore } from '@src/store/ContactStore';
 
 jest.mock('@src/services/RandomUserService');
 const mockedRandomUserService = randomUserService as jest.Mocked<

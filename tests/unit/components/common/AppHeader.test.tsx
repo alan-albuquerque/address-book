@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import React from 'react';
 import { MemoryRouter, Router } from 'react-router-dom';
-import AppHeader, { AppHeaderProps } from './index';
+import AppHeader, { AppHeaderProps } from '@src/components/common/AppHeader';
 
 const renderAppHeader = (props: Partial<AppHeaderProps> = {}) => {
   return render(

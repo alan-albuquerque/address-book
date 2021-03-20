@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import React from 'react';
-import Layout from './index';
+import Layout from '@src/components/core/Layout';
 
 describe('<Layout />', () => {
   test('should proper render with a children', async () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { render } from '@testing-library/react';
-import Button, { ButtonProps } from './index';
+import Button, { ButtonProps } from '@src/components/core/Button';
 
 const renderButton = (props: Partial<ButtonProps> = {}) => {
   return render(<Button {...props} />);

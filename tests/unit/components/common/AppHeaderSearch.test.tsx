@@ -1,6 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import AppHeaderSearch, { AppHeaderSearchProps } from './index';
+import AppHeaderSearch, {
+  AppHeaderSearchProps,
+} from '@src/components/common/AppHeaderSearch';
 
 const renderAppHeaderSearch = (props: Partial<AppHeaderSearchProps> = {}) => {
   return render(<AppHeaderSearch {...props} />);

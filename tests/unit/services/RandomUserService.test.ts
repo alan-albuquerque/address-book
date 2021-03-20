@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { randomUserService } from './index';
+import { randomUserService } from '@src/services/RandomUserService';
 
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
