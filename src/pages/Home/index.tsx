@@ -14,6 +14,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { forceCheck } from 'react-lazyload';
 
 const Home: FunctionComponent = observer(() => {
   const { contactStore, settingsStore } = useStore();
@@ -38,6 +39,9 @@ const Home: FunctionComponent = observer(() => {
 
   function onSearch(searchTerm: string) {
     contactStore.searchTerm = searchTerm;
+    setTimeout(() => {
+      forceCheck();
+    }, 100);
   }
 
   function closeModal() {

@@ -53,7 +53,7 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
         <img
           src={pictureUrl}
           alt={fullName}
-          className="contact-picture rounded-full h-14 w-14"
+          className="contact-picture rounded-full h-full w-full"
           data-testid="userPicture"
         />
       );
@@ -63,7 +63,14 @@ const ContactItem: FunctionComponent<ContactItemProps> = memo(
       return pictureLazyLoad ? (
         <LazyLoad
           once
-          offset={200}
+          offset={400}
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
           placeholder={renderPicturePlaceHolder('pictureLoadingPlaceholder')}
         >
           {renderContactPictureImg()}

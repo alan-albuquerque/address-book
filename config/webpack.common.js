@@ -59,6 +59,14 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:8].css',
       chunkFilename: '[id].[contenthash:8].chunk.css',
+      insert: linkTag => {
+        const preloadLinkTag = document.createElement('link');
+        preloadLinkTag.rel = 'preload';
+        preloadLinkTag.as = 'style';
+        preloadLinkTag.href = linkTag.href;
+        document.head.appendChild(preloadLinkTag);
+        document.head.appendChild(linkTag);
+      },
     }),
     new HtmlWebpackPlugin({
       title: 'Contacts App',
