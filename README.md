@@ -37,6 +37,10 @@ After that, you can find all the static files for deployment in the `build` fold
 
 ---
 
+## Future
+- Implement "windowing" with `react-virtualized` [working with the infinite scroll](https://github.com/bvaughn/react-virtualized/blob/master/docs/creatingAnInfiniteLoadingList.md) feature.
+- Prefetch next users batch to optimize the user experience.
+
 ## Languages & main tools
 
 ### JavaScript
