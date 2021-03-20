@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { ISettingsStore } from './types';
 
 export * from './types';
@@ -11,6 +11,11 @@ export class SettingsStore implements ISettingsStore {
   constructor() {
     makeObservable(this, {
       selectedCountries: observable,
+      updateSelectedCountries: action,
     });
+  }
+
+  updateSelectedCountries(selectedCountries: string[]): void {
+    this.selectedCountries = selectedCountries;
   }
 }

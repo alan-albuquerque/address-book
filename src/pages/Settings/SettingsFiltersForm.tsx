@@ -18,7 +18,7 @@ const SettingsFiltersForm: FunctionComponent = observer(() => {
 
   const handleCountryChange = (options: ValueType<OptionTypeBase, boolean>) => {
     const mappedValues = options?.map((option: OptionTypeBase) => option.value);
-    settingsStore.selectedCountries = mappedValues || [];
+    settingsStore.updateSelectedCountries(mappedValues || []);
     contactStore.reset();
   };
 
