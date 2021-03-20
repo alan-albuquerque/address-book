@@ -7,7 +7,7 @@ export interface HeaderProps {
 
 const Header: FunctionComponent<HeaderProps> = ({ sticky, children }) => {
   const classNameList = classNames('flex-1', { 'sticky top-0': sticky });
-  return <div className={classNameList}>{children}</div>;
+  return <header className={classNameList}>{children}</header>;
 };
 
 export default Header;
