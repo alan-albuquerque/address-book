@@ -8,8 +8,12 @@ For development, you will only need Node.js (v14.xx.x) installed on your environ
 - MobX for state management;
 - Lazy load and code splitting;
 - Mobile first;
-- Customizable webpack configuration;
+- Customizable Webpack configuration;
 - Prettify & eslint;
+- Lazy loading of contact photo for better performance;
+- JS & CSS bundle size optimization;
+- Improved `TAB` sequence for usability and user accessibility;
+
 
 ## Install
 
