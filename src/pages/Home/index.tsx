@@ -8,6 +8,7 @@ import { IContact } from '@src/domain/Contact';
 import HomeFiltersDetail from '@src/pages/Home/HomeFiltersDetail';
 import { useStore } from '@src/store';
 import { observer } from 'mobx-react-lite';
+
 import React, {
   FunctionComponent,
   useCallback,
@@ -16,49 +17,29 @@ import React, {
   useState,
 } from 'react';
 import { forceCheck } from 'react-lazyload';
+import { useCallbackRef } from 'use-callback-ref';
 
 const Home: FunctionComponent = observer(() => {
   const { contactStore, settingsStore } = useStore();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openedContact, setOpenedContact] = useState<Partial<IContact>>();
   const appHeaderRef = useRef<HTMLDivElement>(null);
-
-  function moveScreenToBottom() {
-    setTimeout(() => {
+  const loadingRef = useCallbackRef<HTMLDivElement>(null, () => {
+    if (contactStore.currentPage > 1) {
+      // moves the screen down so that the user can see the loading indicator
+      // and the next page when it appear
       window.scrollTo(0, document.body.scrollHeight);
-    });
-  }
-
-  function moveScreenToLoadedContacts() {
-    setTimeout(() => {
-      const headerHeight = appHeaderRef.current?.clientHeight || 90;
-      const scrollYDestination =
-        document.documentElement.scrollTop +
-        (window.innerHeight - (headerHeight + 80));
-      window.scrollTo(0, scrollYDestination);
-    });
-  }
+    }
+  });
 
   const loadMore = useCallback(() => {
     if (contactStore.searchTerm) return;
-    const isFirstLoading = contactStore.currentPage === 0;
     contactStore.currentPage += 1;
-
-    if (!isFirstLoading) {
-      moveScreenToBottom();
-    }
-
-    contactStore
-      .loadContacts({
-        page: contactStore.currentPage,
-        limit: 50,
-        countries: settingsStore.selectedCountries,
-      })
-      .then(() => {
-        if (!isFirstLoading) {
-          moveScreenToLoadedContacts();
-        }
-      });
+    contactStore.loadContacts({
+      page: contactStore.currentPage,
+      limit: 50,
+      countries: settingsStore.selectedCountries,
+    });
   }, [settingsStore, contactStore]);
 
   useEffect(() => {
@@ -104,7 +85,10 @@ const Home: FunctionComponent = observer(() => {
           onClickContact={onClickContact}
         />
         {contactStore.loadingState === 'pending' && (
-          <div className="flex flex-row p-4 justify-center items-center">
+          <div
+            ref={loadingRef}
+            className="flex flex-row p-8 justify-center items-center"
+          >
             <Loading>loading...</Loading>
           </div>
         )}
