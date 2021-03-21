@@ -21,7 +21,7 @@ const HomeFiltersDetail: FunctionComponent = observer(() => {
         </div>
       </div>
       <Link
-        className="ml-auto text-xs font-semibold hover:text-purple-800 w-20"
+        className="ml-auto text-xs font-semibold text-purple-800 hover:underline w-20"
         to="/settings"
         aria-label="Settings page"
         title="Settings"

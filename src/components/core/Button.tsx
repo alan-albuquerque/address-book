@@ -32,7 +32,7 @@ const Button: FunctionComponent<ButtonProps> = props => {
     >
       {icon}
       {children && (
-        <div className="ml-2" data-testid="buttonLabel">
+        <div className={icon && 'ml-2'} data-testid="buttonLabel">
           {children}
         </div>
       )}
