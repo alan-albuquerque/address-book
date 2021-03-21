@@ -12,6 +12,7 @@ import React, {
   FunctionComponent,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import { forceCheck } from 'react-lazyload';
@@ -20,15 +21,44 @@ const Home: FunctionComponent = observer(() => {
   const { contactStore, settingsStore } = useStore();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [openedContact, setOpenedContact] = useState<Partial<IContact>>();
+  const appHeaderRef = useRef<HTMLDivElement>(null);
+
+  function moveScreenToBottom() {
+    setTimeout(() => {
+      window.scrollTo(0, document.body.scrollHeight);
+    });
+  }
+
+  function moveScreenToLoadedContacts() {
+    setTimeout(() => {
+      const headerHeight = appHeaderRef.current?.clientHeight || 90;
+      const scrollYDestination =
+        document.documentElement.scrollTop +
+        (window.innerHeight - (headerHeight + 80));
+      window.scrollTo(0, scrollYDestination);
+    });
+  }
 
   const loadMore = useCallback(() => {
     if (contactStore.searchTerm) return;
+    const isFirstLoading = contactStore.currentPage === 0;
     contactStore.currentPage += 1;
-    contactStore.loadContacts({
-      page: contactStore.currentPage,
-      limit: 50,
-      countries: settingsStore.selectedCountries,
-    });
+
+    if (!isFirstLoading) {
+      moveScreenToBottom();
+    }
+
+    contactStore
+      .loadContacts({
+        page: contactStore.currentPage,
+        limit: 50,
+        countries: settingsStore.selectedCountries,
+      })
+      .then(() => {
+        if (!isFirstLoading) {
+          moveScreenToLoadedContacts();
+        }
+      });
   }, [settingsStore, contactStore]);
 
   useEffect(() => {
@@ -59,7 +89,11 @@ const Home: FunctionComponent = observer(() => {
 
   return (
     <Layout>
-      <AppHeader searchTerm={contactStore.searchTerm} onSearch={onSearch} />
+      <AppHeader
+        ref={appHeaderRef}
+        searchTerm={contactStore.searchTerm}
+        onSearch={onSearch}
+      />
       <div className="max-w-lg mx-auto px-2">
         <HomeFiltersDetail />
         <ContactInfiniteList

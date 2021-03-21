@@ -51,9 +51,13 @@ export class ContactStore implements IContactStore {
     });
   }
 
-  loadContacts({ page, limit, countries }: LoadContactsParams): void {
+  async loadContacts({
+    page,
+    limit,
+    countries,
+  }: LoadContactsParams): Promise<void> {
     this.loadingState = 'pending';
-    randomUserService
+    return randomUserService
       .getUsersPaginated({
         page,
         results: limit,

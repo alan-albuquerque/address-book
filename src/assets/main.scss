@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 .long-text-break {
   overflow-wrap: break-word;
   word-wrap: break-word;

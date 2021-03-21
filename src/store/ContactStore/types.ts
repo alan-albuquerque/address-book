@@ -15,5 +15,5 @@ export interface IContactStore {
   currentPage: number;
   loadingState: LoadingState;
 
-  loadContacts(params: LoadContactsParams): void;
+  loadContacts({ page, limit, countries }: LoadContactsParams): Promise<void>;
 }

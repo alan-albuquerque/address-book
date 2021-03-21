@@ -1,21 +1,24 @@
 import AppHeaderSearch from '@src/components/common/AppHeaderSearch';
 import Button from '@src/components/core/Button';
 import Header from '@src/components/core/Header';
-import React, { FunctionComponent } from 'react';
+import React, {
+  ComponentPropsWithRef,
+  forwardRef,
+  FunctionComponent,
+} from 'react';
 import { FaCog } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-export interface AppHeaderProps {
+export interface AppHeaderProps extends ComponentPropsWithRef<'div'> {
   onSearch?: (searchTerm: string) => void;
   searchTerm?: string;
   title?: string;
 }
 
-const AppHeader: FunctionComponent<AppHeaderProps> = ({
-  onSearch,
-  searchTerm = '',
-  title = '',
-}) => {
+const AppHeader: FunctionComponent<AppHeaderProps> = forwardRef<
+  HTMLDivElement,
+  AppHeaderProps
+>(({ onSearch, searchTerm = '', title = '' }, ref) => {
   const setSearchTextState = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onSearch) onSearch(event.target.value);
   };
@@ -26,7 +29,7 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
 
   return (
     <Header sticky>
-      <div className="flex py-4 bg-white">
+      <div ref={ref} className="flex py-4 bg-white">
         <div
           className="
           flex flex-row justify-center items-center w-3/12 m-auto px-1.5
@@ -78,6 +81,6 @@ const AppHeader: FunctionComponent<AppHeaderProps> = ({
       </div>
     </Header>
   );
-};
+});
 
 export default AppHeader;
